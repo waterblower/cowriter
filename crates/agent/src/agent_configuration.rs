@@ -232,15 +232,7 @@ impl AgentConfiguration {
             .gap_4()
             .border_b_1()
             .border_color(cx.theme().colors().border)
-            .child(
-                v_flex()
-                    .gap_0p5()
-                    .child(Headline::new("LLM Providers"))
-                    .child(
-                        Label::new("Add at least one provider to use AI-powered features.")
-                            .color(Color::Muted),
-                    ),
-            )
+            .child(v_flex().gap_0p5().child(Headline::new("大模型提供商")))
             .children(
                 providers
                     .into_iter()

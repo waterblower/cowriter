@@ -32,22 +32,22 @@ pub enum AnthropicModelMode {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize, PartialEq, EnumIter)]
 pub enum Model {
-    #[serde(rename = "claude-3-5-sonnet", alias = "claude-3-5-sonnet-latest")]
-    Claude3_5Sonnet,
-    #[serde(rename = "claude-3-7-sonnet", alias = "claude-3-7-sonnet-latest")]
-    Claude3_7Sonnet,
-    #[serde(
-        rename = "claude-3-7-sonnet-thinking",
-        alias = "claude-3-7-sonnet-thinking-latest"
-    )]
-    Claude3_7SonnetThinking,
-    #[serde(rename = "claude-opus-4", alias = "claude-opus-4-latest")]
-    ClaudeOpus4,
-    #[serde(
-        rename = "claude-opus-4-thinking",
-        alias = "claude-opus-4-thinking-latest"
-    )]
-    ClaudeOpus4Thinking,
+    // #[serde(rename = "claude-3-5-sonnet", alias = "claude-3-5-sonnet-latest")]
+    // Claude3_5Sonnet,
+    // #[serde(rename = "claude-3-7-sonnet", alias = "claude-3-7-sonnet-latest")]
+    // Claude3_7Sonnet,
+    // #[serde(
+    //     rename = "claude-3-7-sonnet-thinking",
+    //     alias = "claude-3-7-sonnet-thinking-latest"
+    // )]
+    // Claude3_7SonnetThinking,
+    // #[serde(rename = "claude-opus-4", alias = "claude-opus-4-latest")]
+    // ClaudeOpus4,
+    // #[serde(
+    //     rename = "claude-opus-4-thinking",
+    //     alias = "claude-opus-4-thinking-latest"
+    // )]
+    // ClaudeOpus4Thinking,
     #[default]
     #[serde(rename = "claude-sonnet-4", alias = "claude-sonnet-4-latest")]
     ClaudeSonnet4,
@@ -56,14 +56,14 @@ pub enum Model {
         alias = "claude-sonnet-4-thinking-latest"
     )]
     ClaudeSonnet4Thinking,
-    #[serde(rename = "claude-3-5-haiku", alias = "claude-3-5-haiku-latest")]
-    Claude3_5Haiku,
-    #[serde(rename = "claude-3-opus", alias = "claude-3-opus-latest")]
-    Claude3Opus,
-    #[serde(rename = "claude-3-sonnet", alias = "claude-3-sonnet-latest")]
-    Claude3Sonnet,
-    #[serde(rename = "claude-3-haiku", alias = "claude-3-haiku-latest")]
-    Claude3Haiku,
+    // #[serde(rename = "claude-3-5-haiku", alias = "claude-3-5-haiku-latest")]
+    // Claude3_5Haiku,
+    // #[serde(rename = "claude-3-opus", alias = "claude-3-opus-latest")]
+    // Claude3Opus,
+    // #[serde(rename = "claude-3-sonnet", alias = "claude-3-sonnet-latest")]
+    // Claude3Sonnet,
+    // #[serde(rename = "claude-3-haiku", alias = "claude-3-haiku-latest")]
+    // Claude3Haiku,
     #[serde(rename = "custom")]
     Custom {
         name: String,
@@ -85,29 +85,30 @@ pub enum Model {
 
 impl Model {
     pub fn default_fast() -> Self {
-        Self::Claude3_5Haiku
+        Self::ClaudeSonnet4
     }
 
     pub fn from_id(id: &str) -> Result<Self> {
-        if id.starts_with("claude-3-5-sonnet") {
-            Ok(Self::Claude3_5Sonnet)
-        } else if id.starts_with("claude-3-7-sonnet-thinking") {
-            Ok(Self::Claude3_7SonnetThinking)
-        } else if id.starts_with("claude-3-7-sonnet") {
-            Ok(Self::Claude3_7Sonnet)
-        } else if id.starts_with("claude-3-5-haiku") {
-            Ok(Self::Claude3_5Haiku)
-        } else if id.starts_with("claude-3-opus") {
-            Ok(Self::Claude3Opus)
-        } else if id.starts_with("claude-3-sonnet") {
-            Ok(Self::Claude3Sonnet)
-        } else if id.starts_with("claude-3-haiku") {
-            Ok(Self::Claude3Haiku)
-        } else if id.starts_with("claude-opus-4-thinking") {
-            Ok(Self::ClaudeOpus4Thinking)
-        } else if id.starts_with("claude-opus-4") {
-            Ok(Self::ClaudeOpus4)
-        } else if id.starts_with("claude-sonnet-4-thinking") {
+        // if id.starts_with("claude-3-5-sonnet") {
+        //     Ok(Self::Claude3_5Sonnet)
+        // } else if id.starts_with("claude-3-7-sonnet-thinking") {
+        //     Ok(Self::Claude3_7SonnetThinking)
+        // } else if id.starts_with("claude-3-7-sonnet") {
+        //     Ok(Self::Claude3_7Sonnet)
+        // } else if id.starts_with("claude-3-5-haiku") {
+        //     Ok(Self::Claude3_5Haiku)
+        // } else if id.starts_with("claude-3-opus") {
+        //     Ok(Self::Claude3Opus)
+        // } else if id.starts_with("claude-3-sonnet") {
+        //     Ok(Self::Claude3Sonnet)
+        // } else if id.starts_with("claude-3-haiku") {
+        //     Ok(Self::Claude3Haiku)
+        // } else if id.starts_with("claude-opus-4-thinking") {
+        //     Ok(Self::ClaudeOpus4Thinking)
+        // } else if id.starts_with("claude-opus-4") {
+        //     Ok(Self::ClaudeOpus4)
+        // } else
+        if id.starts_with("claude-sonnet-4-thinking") {
             Ok(Self::ClaudeSonnet4Thinking)
         } else if id.starts_with("claude-sonnet-4") {
             Ok(Self::ClaudeSonnet4)
@@ -118,17 +119,17 @@ impl Model {
 
     pub fn id(&self) -> &str {
         match self {
-            Model::ClaudeOpus4 => "claude-opus-4-latest",
-            Model::ClaudeOpus4Thinking => "claude-opus-4-thinking-latest",
+            // Model::ClaudeOpus4 => "claude-opus-4-latest",
+            // Model::ClaudeOpus4Thinking => "claude-opus-4-thinking-latest",
             Model::ClaudeSonnet4 => "claude-sonnet-4-latest",
             Model::ClaudeSonnet4Thinking => "claude-sonnet-4-thinking-latest",
-            Model::Claude3_5Sonnet => "claude-3-5-sonnet-latest",
-            Model::Claude3_7Sonnet => "claude-3-7-sonnet-latest",
-            Model::Claude3_7SonnetThinking => "claude-3-7-sonnet-thinking-latest",
-            Model::Claude3_5Haiku => "claude-3-5-haiku-latest",
-            Model::Claude3Opus => "claude-3-opus-latest",
-            Model::Claude3Sonnet => "claude-3-sonnet-20240229",
-            Model::Claude3Haiku => "claude-3-haiku-20240307",
+            // Model::Claude3_5Sonnet => "claude-3-5-sonnet-latest",
+            // Model::Claude3_7Sonnet => "claude-3-7-sonnet-latest",
+            // Model::Claude3_7SonnetThinking => "claude-3-7-sonnet-thinking-latest",
+            // Model::Claude3_5Haiku => "claude-3-5-haiku-latest",
+            // Model::Claude3Opus => "claude-3-opus-latest",
+            // Model::Claude3Sonnet => "claude-3-sonnet-20240229",
+            // Model::Claude3Haiku => "claude-3-haiku-20240307",
             Self::Custom { name, .. } => name,
         }
     }
@@ -136,31 +137,31 @@ impl Model {
     /// The id of the model that should be used for making API requests
     pub fn request_id(&self) -> &str {
         match self {
-            Model::ClaudeOpus4 | Model::ClaudeOpus4Thinking => "claude-opus-4-20250514",
+            // Model::ClaudeOpus4 | Model::ClaudeOpus4Thinking => "claude-opus-4-20250514",
             Model::ClaudeSonnet4 | Model::ClaudeSonnet4Thinking => "claude-sonnet-4-20250514",
-            Model::Claude3_5Sonnet => "claude-3-5-sonnet-latest",
-            Model::Claude3_7Sonnet | Model::Claude3_7SonnetThinking => "claude-3-7-sonnet-latest",
-            Model::Claude3_5Haiku => "claude-3-5-haiku-latest",
-            Model::Claude3Opus => "claude-3-opus-latest",
-            Model::Claude3Sonnet => "claude-3-sonnet-20240229",
-            Model::Claude3Haiku => "claude-3-haiku-20240307",
+            // Model::Claude3_5Sonnet => "claude-3-5-sonnet-latest",
+            // Model::Claude3_7Sonnet | Model::Claude3_7SonnetThinking => "claude-3-7-sonnet-latest",
+            // Model::Claude3_5Haiku => "claude-3-5-haiku-latest",
+            // Model::Claude3Opus => "claude-3-opus-latest",
+            // Model::Claude3Sonnet => "claude-3-sonnet-20240229",
+            // Model::Claude3Haiku => "claude-3-haiku-20240307",
             Self::Custom { name, .. } => name,
         }
     }
 
     pub fn display_name(&self) -> &str {
         match self {
-            Model::ClaudeOpus4 => "Claude Opus 4",
-            Model::ClaudeOpus4Thinking => "Claude Opus 4 Thinking",
+            // Model::ClaudeOpus4 => "Claude Opus 4",
+            // Model::ClaudeOpus4Thinking => "Claude Opus 4 Thinking",
             Model::ClaudeSonnet4 => "Claude Sonnet 4",
             Model::ClaudeSonnet4Thinking => "Claude Sonnet 4 Thinking",
-            Self::Claude3_7Sonnet => "Claude 3.7 Sonnet",
-            Self::Claude3_5Sonnet => "Claude 3.5 Sonnet",
-            Self::Claude3_7SonnetThinking => "Claude 3.7 Sonnet Thinking",
-            Self::Claude3_5Haiku => "Claude 3.5 Haiku",
-            Self::Claude3Opus => "Claude 3 Opus",
-            Self::Claude3Sonnet => "Claude 3 Sonnet",
-            Self::Claude3Haiku => "Claude 3 Haiku",
+            // Self::Claude3_7Sonnet => "Claude 3.7 Sonnet",
+            // Self::Claude3_5Sonnet => "Claude 3.5 Sonnet",
+            // Self::Claude3_7SonnetThinking => "Claude 3.7 Sonnet Thinking",
+            // Self::Claude3_5Haiku => "Claude 3.5 Haiku",
+            // Self::Claude3Opus => "Claude 3 Opus",
+            // Self::Claude3Sonnet => "Claude 3 Sonnet",
+            // Self::Claude3Haiku => "Claude 3 Haiku",
             Self::Custom {
                 name, display_name, ..
             } => display_name.as_ref().unwrap_or(name),
@@ -169,55 +170,60 @@ impl Model {
 
     pub fn cache_configuration(&self) -> Option<AnthropicModelCacheConfiguration> {
         match self {
-            Self::ClaudeOpus4
-            | Self::ClaudeOpus4Thinking
-            | Self::ClaudeSonnet4
-            | Self::ClaudeSonnet4Thinking
-            | Self::Claude3_5Sonnet
-            | Self::Claude3_5Haiku
-            | Self::Claude3_7Sonnet
-            | Self::Claude3_7SonnetThinking
-            | Self::Claude3Haiku => Some(AnthropicModelCacheConfiguration {
+            // Self::ClaudeOpus4
+            // | Self::ClaudeOpus4Thinking
+            // | Self::ClaudeSonnet4
+            // |
+            Self::ClaudeSonnet4Thinking
+            // | Self::Claude3_5Sonnet
+            // | Self::Claude3_5Haiku
+            // | Self::Claude3_7Sonnet
+            // | Self::Claude3_7SonnetThinking
+            // | Self::Claude3Haiku
+            =>
+            Some(AnthropicModelCacheConfiguration {
                 min_total_token: 2_048,
                 should_speculate: true,
                 max_cache_anchors: 4,
             }),
-            Self::Custom {
-                cache_configuration,
-                ..
-            } => cache_configuration.clone(),
+            // Self::Custom {
+            //     cache_configuration,
+            //     ..
+            // } => cache_configuration.clone(),
             _ => None,
         }
     }
 
     pub fn max_token_count(&self) -> usize {
         match self {
-            Self::ClaudeOpus4
-            | Self::ClaudeOpus4Thinking
+            // Self::ClaudeOpus4
+            // | Self::ClaudeOpus4Thinking
             | Self::ClaudeSonnet4
             | Self::ClaudeSonnet4Thinking
-            | Self::Claude3_5Sonnet
-            | Self::Claude3_5Haiku
-            | Self::Claude3_7Sonnet
-            | Self::Claude3_7SonnetThinking
-            | Self::Claude3Opus
-            | Self::Claude3Sonnet
-            | Self::Claude3Haiku => 200_000,
+            // | Self::Claude3_5Sonnet
+            // | Self::Claude3_5Haiku
+            // | Self::Claude3_7Sonnet
+            // | Self::Claude3_7SonnetThinking
+            // | Self::Claude3Opus
+            // | Self::Claude3Sonnet
+            // | Self::Claude3Haiku
+            =>
+            200_000,
             Self::Custom { max_tokens, .. } => *max_tokens,
         }
     }
 
     pub fn max_output_tokens(&self) -> u32 {
         match self {
-            Self::Claude3Opus | Self::Claude3Sonnet | Self::Claude3Haiku => 4_096,
-            Self::Claude3_5Sonnet
-            | Self::Claude3_7Sonnet
-            | Self::Claude3_7SonnetThinking
-            | Self::Claude3_5Haiku
-            | Self::ClaudeOpus4
-            | Self::ClaudeOpus4Thinking
-            | Self::ClaudeSonnet4
-            | Self::ClaudeSonnet4Thinking => 8_192,
+            // Self::Claude3Opus | Self::Claude3Sonnet | Self::Claude3Haiku => 4_096,
+            // Self::Claude3_5Sonnet
+            // | Self::Claude3_7Sonnet
+            // | Self::Claude3_7SonnetThinking
+            // | Self::Claude3_5Haiku
+            // | Self::ClaudeOpus4
+            // | Self::ClaudeOpus4Thinking
+            // |
+            Self::ClaudeSonnet4 | Self::ClaudeSonnet4Thinking => 8_192,
             Self::Custom {
                 max_output_tokens, ..
             } => max_output_tokens.unwrap_or(4_096),
@@ -226,36 +232,42 @@ impl Model {
 
     pub fn default_temperature(&self) -> f32 {
         match self {
-            Self::ClaudeOpus4
-            | Self::ClaudeOpus4Thinking
-            | Self::ClaudeSonnet4
+            // Self::ClaudeOpus4
+            // | Self::ClaudeOpus4Thinking
+            // |
+            Self::ClaudeSonnet4
             | Self::ClaudeSonnet4Thinking
-            | Self::Claude3_5Sonnet
-            | Self::Claude3_7Sonnet
-            | Self::Claude3_7SonnetThinking
-            | Self::Claude3_5Haiku
-            | Self::Claude3Opus
-            | Self::Claude3Sonnet
-            | Self::Claude3Haiku => 1.0,
-            Self::Custom {
+            // | Self::Claude3_5Sonnet
+            // | Self::Claude3_7Sonnet
+            // | Self::Claude3_7SonnetThinking
+            // | Self::Claude3_5Haiku
+            // | Self::Claude3Opus
+            // | Self::Claude3Sonnet
+            // | Self::Claude3Haiku
+            => 1.0,
+            Self::Custom
+            {
                 default_temperature,
                 ..
-            } => default_temperature.unwrap_or(1.0),
+            }
+            => default_temperature.unwrap_or(1.0),
         }
     }
 
     pub fn mode(&self) -> AnthropicModelMode {
         match self {
-            Self::Claude3_5Sonnet
-            | Self::Claude3_7Sonnet
-            | Self::Claude3_5Haiku
-            | Self::ClaudeOpus4
-            | Self::ClaudeSonnet4
-            | Self::Claude3Opus
-            | Self::Claude3Sonnet
-            | Self::Claude3Haiku => AnthropicModelMode::Default,
-            Self::Claude3_7SonnetThinking
-            | Self::ClaudeOpus4Thinking
+            // Self::Claude3_5Sonnet
+            // | Self::Claude3_7Sonnet
+            // | Self::Claude3_5Haiku
+            // | Self::ClaudeOpus4
+            // |
+            Self::ClaudeSonnet4
+            // | Self::Claude3Opus
+            // | Self::Claude3Sonnet
+            // | Self::Claude3Haiku
+            => AnthropicModelMode::Default,
+            // Self::Claude3_7SonnetThinking
+            // | Self::ClaudeOpus4Thinking
             | Self::ClaudeSonnet4Thinking => AnthropicModelMode::Thinking {
                 budget_tokens: Some(4_096),
             },
@@ -272,11 +284,11 @@ impl Model {
             .collect::<Vec<_>>();
 
         match self {
-            Self::Claude3_7Sonnet | Self::Claude3_7SonnetThinking => {
-                // Try beta token-efficient tool use (supported in Claude 3.7 Sonnet only)
-                // https://docs.anthropic.com/en/docs/build-with-claude/tool-use/token-efficient-tool-use
-                headers.push("token-efficient-tools-2025-02-19".to_string());
-            }
+            // Self::Claude3_7Sonnet | Self::Claude3_7SonnetThinking => {
+            //     // Try beta token-efficient tool use (supported in Claude 3.7 Sonnet only)
+            //     // https://docs.anthropic.com/en/docs/build-with-claude/tool-use/token-efficient-tool-use
+            //     headers.push("token-efficient-tools-2025-02-19".to_string());
+            // }
             Self::Custom {
                 extra_beta_headers, ..
             } => {
@@ -294,15 +306,15 @@ impl Model {
     }
 
     pub fn tool_model_id(&self) -> &str {
-        if let Self::Custom {
-            tool_override: Some(tool_override),
-            ..
-        } = self
-        {
-            tool_override
-        } else {
-            self.request_id()
-        }
+        // if let Self::Custom {
+        //     tool_override: Some(tool_override),
+        //     ..
+        // } = self
+        // {
+        //     tool_override
+        // } else {
+        self.request_id()
+        // }
     }
 }
 
