@@ -388,81 +388,81 @@ impl AgentConfiguration {
             .gap_2p5()
             .border_b_1()
             .border_color(cx.theme().colors().border)
-            .child(Headline::new("General Settings"))
+            .child(Headline::new("通用设置"))
             .child(self.render_command_permission(cx))
             .child(self.render_single_file_review(cx))
             .child(self.render_sound_notification(cx))
     }
 
-    fn render_context_servers_section(
-        &mut self,
-        window: &mut Window,
-        cx: &mut Context<Self>,
-    ) -> impl IntoElement {
-        let context_server_ids = self.context_server_store.read(cx).all_server_ids().clone();
+    // fn render_context_servers_section(
+    //     &mut self,
+    //     window: &mut Window,
+    //     cx: &mut Context<Self>,
+    // ) -> impl IntoElement {
+    //     let context_server_ids = self.context_server_store.read(cx).all_server_ids().clone();
 
-        v_flex()
-            .p(DynamicSpacing::Base16.rems(cx))
-            .pr(DynamicSpacing::Base20.rems(cx))
-            .gap_2()
-            .border_b_1()
-            .border_color(cx.theme().colors().border)
-            .child(
-                v_flex()
-                    .gap_0p5()
-                    .child(Headline::new("Model Context Protocol (MCP) Servers"))
-                    .child(Label::new("Connect to context servers via the Model Context Protocol either via Zed extensions or directly.").color(Color::Muted)),
-            )
-            .children(
-                context_server_ids.into_iter().map(|context_server_id| {
-                    self.render_context_server(context_server_id, window, cx)
-                }),
-            )
-            .child(
-                h_flex()
-                    .justify_between()
-                    .gap_2()
-                    .child(
-                        h_flex().w_full().child(
-                            Button::new("add-context-server", "Add Custom Server")
-                                .style(ButtonStyle::Filled)
-                                .layer(ElevationIndex::ModalSurface)
-                                .full_width()
-                                .icon(IconName::Plus)
-                                .icon_size(IconSize::Small)
-                                .icon_position(IconPosition::Start)
-                                .on_click(|_event, window, cx| {
-                                    window.dispatch_action(AddContextServer.boxed_clone(), cx)
-                                }),
-                        ),
-                    )
-                    .child(
-                        h_flex().w_full().child(
-                            Button::new(
-                                "install-context-server-extensions",
-                                "Install MCP Extensions",
-                            )
-                            .style(ButtonStyle::Filled)
-                            .layer(ElevationIndex::ModalSurface)
-                            .full_width()
-                            .icon(IconName::Hammer)
-                            .icon_size(IconSize::Small)
-                            .icon_position(IconPosition::Start)
-                            .on_click(|_event, window, cx| {
-                                window.dispatch_action(
-                                    zed_actions::Extensions {
-                                        category_filter: Some(
-                                            ExtensionCategoryFilter::ContextServers,
-                                        ),
-                                    }
-                                    .boxed_clone(),
-                                    cx,
-                                )
-                            }),
-                        ),
-                    ),
-            )
-    }
+    //     v_flex()
+    //         .p(DynamicSpacing::Base16.rems(cx))
+    //         .pr(DynamicSpacing::Base20.rems(cx))
+    //         .gap_2()
+    //         .border_b_1()
+    //         .border_color(cx.theme().colors().border)
+    //         .child(
+    //             v_flex()
+    //                 .gap_0p5()
+    //                 .child(Headline::new("Model Context Protocol (MCP) Servers"))
+    //                 .child(Label::new("Connect to context servers via the Model Context Protocol either via Zed extensions or directly.").color(Color::Muted)),
+    //         )
+    //         .children(
+    //             context_server_ids.into_iter().map(|context_server_id| {
+    //                 self.render_context_server(context_server_id, window, cx)
+    //             }),
+    //         )
+    //         .child(
+    //             h_flex()
+    //                 .justify_between()
+    //                 .gap_2()
+    //                 .child(
+    //                     h_flex().w_full().child(
+    //                         Button::new("add-context-server", "Add Custom Server")
+    //                             .style(ButtonStyle::Filled)
+    //                             .layer(ElevationIndex::ModalSurface)
+    //                             .full_width()
+    //                             .icon(IconName::Plus)
+    //                             .icon_size(IconSize::Small)
+    //                             .icon_position(IconPosition::Start)
+    //                             .on_click(|_event, window, cx| {
+    //                                 window.dispatch_action(AddContextServer.boxed_clone(), cx)
+    //                             }),
+    //                     ),
+    //                 )
+    //                 .child(
+    //                     h_flex().w_full().child(
+    //                         Button::new(
+    //                             "install-context-server-extensions",
+    //                             "Install MCP Extensions",
+    //                         )
+    //                         .style(ButtonStyle::Filled)
+    //                         .layer(ElevationIndex::ModalSurface)
+    //                         .full_width()
+    //                         .icon(IconName::Hammer)
+    //                         .icon_size(IconSize::Small)
+    //                         .icon_position(IconPosition::Start)
+    //                         .on_click(|_event, window, cx| {
+    //                             window.dispatch_action(
+    //                                 zed_actions::Extensions {
+    //                                     category_filter: Some(
+    //                                         ExtensionCategoryFilter::ContextServers,
+    //                                     ),
+    //                                 }
+    //                                 .boxed_clone(),
+    //                                 cx,
+    //                             )
+    //                         }),
+    //                     ),
+    //                 ),
+    //         )
+    // }
 
     fn render_context_server(
         &self,
@@ -866,7 +866,7 @@ impl Render for AgentConfiguration {
                     .size_full()
                     .overflow_y_scroll()
                     .child(self.render_general_settings_section(cx))
-                    .child(self.render_context_servers_section(window, cx))
+                    // .child(self.render_context_servers_section(window, cx))
                     .child(self.render_provider_configuration_section(cx)),
             )
             .child(

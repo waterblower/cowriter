@@ -60,7 +60,7 @@ impl Component for SettingsGroup {
                         vec![
                             single_example(
                                 "Empty Group",
-                                SettingsGroup::new("General Settings").into_any_element(),
+                                SettingsGroup::new("通用设置").into_any_element(),
                             ),
                             single_example(
                                 "With Children",
