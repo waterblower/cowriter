@@ -92,30 +92,30 @@ impl Render for DiagnosticIndicator {
         };
 
         indicator
-            .child(
-                ButtonLike::new("diagnostic-indicator")
-                    .child(diagnostic_indicator)
-                    .tooltip(|window, cx| {
-                        Tooltip::for_action("Project Diagnostics", &Deploy, window, cx)
-                    })
-                    .on_click(cx.listener(|this, _, window, cx| {
-                        if let Some(workspace) = this.workspace.upgrade() {
-                            if this.summary.error_count == 0 && this.summary.warning_count > 0 {
-                                cx.update_default_global(
-                                    |show_warnings: &mut IncludeWarnings, _| show_warnings.0 = true,
-                                );
-                            }
-                            workspace.update(cx, |workspace, cx| {
-                                ProjectDiagnosticsEditor::deploy(
-                                    workspace,
-                                    &Default::default(),
-                                    window,
-                                    cx,
-                                )
-                            })
-                        }
-                    })),
-            )
+            // .child(
+            //     ButtonLike::new("diagnostic-indicator")
+            //         .child(diagnostic_indicator)
+            //         .tooltip(|window, cx| {
+            //             Tooltip::for_action("Project Diagnostics", &Deploy, window, cx)
+            //         })
+            //         .on_click(cx.listener(|this, _, window, cx| {
+            //             if let Some(workspace) = this.workspace.upgrade() {
+            //                 if this.summary.error_count == 0 && this.summary.warning_count > 0 {
+            //                     cx.update_default_global(
+            //                         |show_warnings: &mut IncludeWarnings, _| show_warnings.0 = true,
+            //                     );
+            //                 }
+            //                 workspace.update(cx, |workspace, cx| {
+            //                     ProjectDiagnosticsEditor::deploy(
+            //                         workspace,
+            //                         &Default::default(),
+            //                         window,
+            //                         cx,
+            //                     )
+            //                 })
+            //             }
+            //         })),
+            // )
             .children(status)
     }
 }

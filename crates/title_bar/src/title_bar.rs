@@ -154,9 +154,9 @@ impl Render for TitleBar {
 
         children.push(self.render_collaborator_list(window, cx).into_any_element());
 
-        if title_bar_settings.show_onboarding_banner {
-            children.push(self.banner.clone().into_any_element())
-        }
+        // if title_bar_settings.show_onboarding_banner {
+        //     children.push(self.banner.clone().into_any_element())
+        // }
 
         children.push(
             h_flex()

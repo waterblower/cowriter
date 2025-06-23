@@ -4427,7 +4427,8 @@ impl Panel for GitPanel {
     }
 
     fn icon_tooltip(&self, _window: &Window, _cx: &App) -> Option<&'static str> {
-        Some("Git Panel")
+        // Some("Git Panel")
+        None
     }
 
     fn toggle_action(&self) -> Box<dyn Action> {

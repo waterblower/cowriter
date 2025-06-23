@@ -239,31 +239,31 @@ impl Render for InlineCompletionButton {
                     && self.user_store.read(cx).subscription_period().is_some();
 
                 if !has_subscription || !current_user_terms_accepted.unwrap_or(false) {
-                    let signed_in = current_user_terms_accepted.is_some();
-                    let tooltip_meta = if signed_in {
-                        if has_subscription {
-                            "Read Terms of Service"
-                        } else {
-                            "Choose a Plan"
-                        }
-                    } else {
-                        "Sign in to use"
-                    };
+                    // let signed_in = current_user_terms_accepted.is_some();
+                    // let tooltip_meta = if signed_in {
+                    //     if has_subscription {
+                    //         "Read Terms of Service"
+                    //     } else {
+                    //         "Choose a Plan"
+                    //     }
+                    // } else {
+                    //     "Sign in to use"
+                    // };
 
                     return div().child(
                         IconButton::new("zed-predict-pending-button", zeta_icon)
                             .shape(IconButtonShape::Square)
                             .indicator(Indicator::dot().color(Color::Muted))
                             .indicator_border_color(Some(cx.theme().colors().status_bar_background))
-                            .tooltip(move |window, cx| {
-                                Tooltip::with_meta(
-                                    "Edit Predictions",
-                                    None,
-                                    tooltip_meta,
-                                    window,
-                                    cx,
-                                )
-                            })
+                            // .tooltip(move |window, cx| {
+                            //     Tooltip::with_meta(
+                            //         "Edit Predictions",
+                            //         None,
+                            //         tooltip_meta,
+                            //         window,
+                            //         cx,
+                            //     )
+                            // })
                             .on_click(cx.listener(move |_, _, window, cx| {
                                 telemetry::event!(
                                     "Pending ToS Clicked",
@@ -301,32 +301,32 @@ impl Render for InlineCompletionButton {
                             ))
                             .indicator_border_color(Some(cx.theme().colors().status_bar_background))
                         },
-                    )
-                    .when(!self.popover_menu_handle.is_deployed(), |element| {
-                        element.tooltip(move |window, cx| {
-                            if enabled {
-                                if show_editor_predictions {
-                                    Tooltip::for_action("Edit Prediction", &ToggleMenu, window, cx)
-                                } else {
-                                    Tooltip::with_meta(
-                                        "Edit Prediction",
-                                        Some(&ToggleMenu),
-                                        "Hidden For This File",
-                                        window,
-                                        cx,
-                                    )
-                                }
-                            } else {
-                                Tooltip::with_meta(
-                                    "Edit Prediction",
-                                    Some(&ToggleMenu),
-                                    "Disabled For This File",
-                                    window,
-                                    cx,
-                                )
-                            }
-                        })
-                    });
+                    );
+                // .when(!self.popover_menu_handle.is_deployed(), |element| {
+                //     element.tooltip(move |window, cx| {
+                //         // if enabled {
+                //         //     if show_editor_predictions {
+                //         //         Tooltip::for_action("Edit Prediction", &ToggleMenu, window, cx)
+                //         //     } else {
+                //         //         Tooltip::with_meta(
+                //         //             "Edit Prediction",
+                //         //             Some(&ToggleMenu),
+                //         //             "Hidden For This File",
+                //         //             window,
+                //         //             cx,
+                //         //         )
+                //         //     }
+                //         // } else {
+                //         //     Tooltip::with_meta(
+                //         //         "Edit Prediction",
+                //         //         Some(&ToggleMenu),
+                //         //         "Disabled For This File",
+                //         //         window,
+                //         //         cx,
+                //         //     )
+                //         // }
+                //     })
+                // });
 
                 let this = cx.entity().clone();
 

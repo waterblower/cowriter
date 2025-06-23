@@ -339,7 +339,7 @@ impl Render for QuickActionBar {
                                                 })
                                                 .ok();
                                         }
-                                    }
+                                    },
                                 );
                             }
 
@@ -390,50 +390,56 @@ impl Render for QuickActionBar {
                             }
 
                             if supports_minimap {
-                                menu = menu.toggleable_entry("Minimap", minimap_enabled, IconPosition::Start, Some(editor::actions::ToggleMinimap.boxed_clone()), {
-                                    let editor = editor.clone();
-                                    move |window, cx| {
-                                        editor
-                                            .update(cx, |editor, cx| {
-                                                editor.toggle_minimap(
-                                                    &editor::actions::ToggleMinimap,
-                                                    window,
-                                                    cx,
-                                                );
-                                            })
-                                            .ok();
-                                    }
-                                },)
-                            }
-
-                            if has_edit_prediction_provider {
-                                let mut inline_completion_entry = ContextMenuEntry::new("Edit Predictions")
-                                    .toggleable(IconPosition::Start, edit_predictions_enabled_at_cursor && show_edit_predictions)
-                                    .disabled(!edit_predictions_enabled_at_cursor)
-                                    .action(
-                                        editor::actions::ToggleEditPrediction.boxed_clone(),
-                                    ).handler({
+                                menu = menu.toggleable_entry(
+                                    "Minimap",
+                                    minimap_enabled,
+                                    IconPosition::Start,
+                                    Some(editor::actions::ToggleMinimap.boxed_clone()),
+                                    {
                                         let editor = editor.clone();
                                         move |window, cx| {
                                             editor
                                                 .update(cx, |editor, cx| {
-                                                    editor.toggle_edit_predictions(
-                                                        &editor::actions::ToggleEditPrediction,
+                                                    editor.toggle_minimap(
+                                                        &editor::actions::ToggleMinimap,
                                                         window,
                                                         cx,
                                                     );
                                                 })
                                                 .ok();
                                         }
-                                    });
-                                if !edit_predictions_enabled_at_cursor {
-                                    inline_completion_entry = inline_completion_entry.documentation_aside(DocumentationSide::Left, |_| {
-                                        Label::new("You can't toggle edit predictions for this file as it is within the excluded files list.").into_any_element()
-                                    });
-                                }
-
-                                menu = menu.item(inline_completion_entry);
+                                    },
+                                )
                             }
+
+                            // if has_edit_prediction_provider {
+                            //     let mut inline_completion_entry = ContextMenuEntry::new("Edit Predictions")
+                            //         .toggleable(IconPosition::Start, edit_predictions_enabled_at_cursor && show_edit_predictions)
+                            //         .disabled(!edit_predictions_enabled_at_cursor)
+                            //         .action(
+                            //             editor::actions::ToggleEditPrediction.boxed_clone(),
+                            //         ).handler({
+                            //             let editor = editor.clone();
+                            //             move |window, cx| {
+                            //                 editor
+                            //                     .update(cx, |editor, cx| {
+                            //                         editor.toggle_edit_predictions(
+                            //                             &editor::actions::ToggleEditPrediction,
+                            //                             window,
+                            //                             cx,
+                            //                         );
+                            //                     })
+                            //                     .ok();
+                            //             }
+                            //         });
+                            //     if !edit_predictions_enabled_at_cursor {
+                            //         inline_completion_entry = inline_completion_entry.documentation_aside(DocumentationSide::Left, |_| {
+                            //             Label::new("You can't toggle edit predictions for this file as it is within the excluded files list.").into_any_element()
+                            //         });
+                            //     }
+
+                            //     menu = menu.item(inline_completion_entry);
+                            // }
 
                             menu = menu.separator();
 
@@ -533,11 +539,7 @@ impl Render for QuickActionBar {
                                     move |window, cx| {
                                         editor
                                             .update(cx, |editor, cx| {
-                                                editor.toggle_git_blame(
-                                                    &git::Blame,
-                                                    window,
-                                                    cx,
-                                                )
+                                                editor.toggle_git_blame(&git::Blame, window, cx)
                                             })
                                             .ok();
                                     }
@@ -554,7 +556,10 @@ impl Render for QuickActionBar {
                                 {
                                     move |window, cx| {
                                         let new_value = !vim_mode_enabled;
-                                        VimModeSetting::override_global(VimModeSetting(new_value), cx);
+                                        VimModeSetting::override_global(
+                                            VimModeSetting(new_value),
+                                            cx,
+                                        );
                                         window.refresh();
                                     }
                                 },

@@ -1245,7 +1245,8 @@ impl Panel for DebugPanel {
 
     fn icon_tooltip(&self, _window: &Window, cx: &App) -> Option<&'static str> {
         if DebuggerSettings::get_global(cx).button {
-            Some("Debug Panel")
+            // Some("Debug Panel")
+            None
         } else {
             None
         }
