@@ -113,7 +113,7 @@ impl Render for QuickActionBar {
         let auto_signature_help_enabled = editor_value.auto_signature_help_enabled(cx);
         let show_line_numbers = editor_value.line_numbers_enabled(cx);
         // let has_edit_prediction_provider = editor_value.edit_prediction_provider().is_some();
-        let show_edit_predictions = editor_value.edit_predictions_enabled();
+        // let show_edit_predictions = editor_value.edit_predictions_enabled();
         // let edit_predictions_enabled_at_cursor =
         //     editor_value.edit_predictions_enabled_at_cursor(cx);
         let supports_minimap = editor_value.supports_minimap(cx);
