@@ -18,8 +18,16 @@ use project::project_settings::DiagnosticSeverity;
 use search::{BufferSearchBar, buffer_search};
 use settings::{Settings, SettingsStore};
 use ui::{
-    ButtonStyle, ContextMenu, ContextMenuEntry, DocumentationSide, IconButton, IconName, IconSize,
-    PopoverMenu, PopoverMenuHandle, Tooltip, prelude::*,
+    ButtonStyle,
+    ContextMenu,
+    // ContextMenuEntry, DocumentationSide,
+    IconButton,
+    IconName,
+    IconSize,
+    PopoverMenu,
+    PopoverMenuHandle,
+    Tooltip,
+    prelude::*,
 };
 use vim_mode_setting::VimModeSetting;
 use workspace::{
@@ -104,10 +112,10 @@ impl Render for QuickActionBar {
         let show_git_blame_gutter = editor_value.show_git_blame_gutter();
         let auto_signature_help_enabled = editor_value.auto_signature_help_enabled(cx);
         let show_line_numbers = editor_value.line_numbers_enabled(cx);
-        let has_edit_prediction_provider = editor_value.edit_prediction_provider().is_some();
+        // let has_edit_prediction_provider = editor_value.edit_prediction_provider().is_some();
         let show_edit_predictions = editor_value.edit_predictions_enabled();
-        let edit_predictions_enabled_at_cursor =
-            editor_value.edit_predictions_enabled_at_cursor(cx);
+        // let edit_predictions_enabled_at_cursor =
+        //     editor_value.edit_predictions_enabled_at_cursor(cx);
         let supports_minimap = editor_value.supports_minimap(cx);
         let minimap_enabled = supports_minimap && editor_value.minimap().is_some();
         let has_available_code_actions = editor_value.has_available_code_actions();
