@@ -305,11 +305,11 @@ pub fn initialize_workspace(
             )
         });
 
-        workspace.register_action({
-            move |_, _: &inline_completion_button::ToggleMenu, window, cx| {
-                popover_menu_handle.toggle(window, cx);
-            }
-        });
+        // workspace.register_action({
+        //     move |_, _: &inline_completion_button::ToggleMenu, window, cx| {
+        //         popover_menu_handle.toggle(window, cx);
+        //     }
+        // });
 
         let search_button = cx.new(|_| search::search_status_button::SearchButton::new());
         let diagnostic_summary =
