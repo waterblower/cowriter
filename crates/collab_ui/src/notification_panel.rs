@@ -758,7 +758,8 @@ impl Panel for NotificationPanel {
     }
 
     fn icon_tooltip(&self, _window: &Window, _cx: &App) -> Option<&'static str> {
-        Some("Notification Panel")
+        // Some("Notification Panel")
+        None
     }
 
     fn icon_label(&self, _window: &Window, cx: &App) -> Option<String> {
