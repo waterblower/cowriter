@@ -800,7 +800,7 @@
     "default_profile": "write",
     "profiles": {
       "write": {
-        "name": "Write",
+        "name": "写作",
         "enable_all_context_servers": true,
         "tools": {
           "copy_path": true,
@@ -821,7 +821,7 @@
         }
       },
       "ask": {
-        "name": "Ask",
+        "name": "纯聊天",
         // We don't know which of the context server tools are safe for the "Ask" profile, so we don't enable them by default.
         // "enable_all_context_servers": true,
         "tools": {
@@ -837,11 +837,6 @@
           "thinking": true,
           "web_search": true
         }
-      },
-      "minimal": {
-        "name": "Minimal",
-        "enable_all_context_servers": false,
-        "tools": {}
       }
     },
     // Where to show notifications when the agent has either completed

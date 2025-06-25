@@ -393,7 +393,7 @@ impl TitleBar {
         let name = if let Some(name) = name {
             util::truncate_and_trailoff(name, MAX_PROJECT_NAME_LENGTH)
         } else {
-            "Open recent project".to_string()
+            "打开近期项目".to_string()
         };
 
         Button::new("project_name_trigger", name)

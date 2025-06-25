@@ -650,7 +650,7 @@ impl Item for Editor {
         if let Some(path) = path_for_buffer(&self.buffer, detail, true, cx) {
             path.to_string_lossy().to_string().into()
         } else {
-            "untitled".into()
+            "未命名".into()
         }
     }
 
@@ -962,7 +962,7 @@ impl Item for Editor {
                     if multibuffer.is_singleton() {
                         multibuffer.title(cx).to_string()
                     } else {
-                        "untitled".to_string()
+                        "未命名".to_string()
                     }
                 })
         });

@@ -92,7 +92,7 @@ impl PickerDelegate for FileContextPickerDelegate {
     }
 
     fn placeholder_text(&self, _window: &mut Window, _cx: &mut App) -> Arc<str> {
-        "Search files & directories…".into()
+        "搜索文件 & 文件夹…".into()
     }
 
     fn update_matches(

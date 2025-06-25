@@ -123,7 +123,7 @@ impl Supermaven {
             let path = buffer
                 .file()
                 .and_then(|file| Some(file.as_local()?.abs_path(cx)))
-                .unwrap_or_else(|| PathBuf::from("untitled"))
+                .unwrap_or_else(|| PathBuf::from("未命名"))
                 .to_string_lossy()
                 .to_string();
             let content = buffer.text();

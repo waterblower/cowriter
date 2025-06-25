@@ -79,9 +79,9 @@ fn format_absolute_date(
         let timestamp_date = timestamp.date();
         let reference_date = reference.date();
         if timestamp_date == reference_date {
-            "Today".to_string()
+            "昨天".to_string()
         } else if reference_date.previous_day() == Some(timestamp_date) {
-            "Yesterday".to_string()
+            "昨天".to_string()
         } else {
             macos::format_date(&timestamp)
         }
@@ -169,9 +169,9 @@ fn format_absolute_date_medium(
         let timestamp_date = timestamp.date();
         let reference_date = reference.date();
         if timestamp_date == reference_date {
-            "Today".to_string()
+            "昨天".to_string()
         } else if reference_date.previous_day() == Some(timestamp_date) {
-            "Yesterday".to_string()
+            "昨天".to_string()
         } else {
             macos::format_date_medium(&timestamp)
         }
@@ -192,9 +192,9 @@ fn format_absolute_date_medium(
         let timestamp_date = timestamp.date();
         let reference_date = reference.date();
         if timestamp_date == reference_date {
-            "Today".to_string()
+            "昨天".to_string()
         } else if reference_date.previous_day() == Some(timestamp_date) {
-            "Yesterday".to_string()
+            "昨天".to_string()
         } else {
             format_timestamp_naive_date_medium(
                 timestamp,
@@ -244,8 +244,8 @@ fn format_relative_date(timestamp: OffsetDateTime, reference: OffsetDateTime) ->
     let difference = reference_date - timestamp_date;
     let days = difference.whole_days();
     match days {
-        0 => "Today".to_string(),
-        1 => "Yesterday".to_string(),
+        0 => "昨天".to_string(),
+        1 => "昨天".to_string(),
         2..=6 => format!("{} days ago", days),
         _ => {
             let weeks = difference.whole_weeks();
@@ -341,9 +341,9 @@ fn format_timestamp_naive_date(
     let timestamp_local_date = timestamp_local.date();
 
     if timestamp_local_date == reference_local_date {
-        "Today".to_string()
+        "昨天".to_string()
     } else if reference_local_date.previous_day() == Some(timestamp_local_date) {
-        "Yesterday".to_string()
+        "昨天".to_string()
     } else {
         match is_12_hour_time {
             true => format!(
@@ -534,21 +534,18 @@ mod tests {
 
         // Test with same date (today)
         let timestamp_today = create_offset_datetime(1990, 4, 12, 9, 30, 0);
-        assert_eq!(format_date(timestamp_today, reference, true), "Today");
+        assert_eq!(format_date(timestamp_today, reference, true), "昨天");
 
         // Test with previous day (yesterday)
         let timestamp_yesterday = create_offset_datetime(1990, 4, 11, 9, 30, 0);
-        assert_eq!(
-            format_date(timestamp_yesterday, reference, true),
-            "Yesterday"
-        );
+        assert_eq!(format_date(timestamp_yesterday, reference, true), "昨天");
 
         // Test with other date
         let timestamp_other = create_offset_datetime(1990, 4, 10, 9, 30, 0);
         let result = format_date(timestamp_other, reference, true);
         assert!(!result.is_empty());
-        assert_ne!(result, "Today");
-        assert_ne!(result, "Yesterday");
+        assert_ne!(result, "昨天");
+        assert_ne!(result, "昨天");
     }
 
     #[test]
@@ -568,7 +565,7 @@ mod tests {
 
         // Test with enhanced formatting (today)
         let result_enhanced = format_date_medium(timestamp, reference, true);
-        assert_eq!(result_enhanced, "Today");
+        assert_eq!(result_enhanced, "昨天");
 
         // Test with standard formatting
         let result_standard = format_date_medium(timestamp, reference, false);
@@ -577,14 +574,14 @@ mod tests {
         // Test yesterday with enhanced formatting
         let timestamp_yesterday = create_offset_datetime(1990, 4, 11, 9, 30, 0);
         let result_yesterday = format_date_medium(timestamp_yesterday, reference, true);
-        assert_eq!(result_yesterday, "Yesterday");
+        assert_eq!(result_yesterday, "昨天");
 
         // Test other date with enhanced formatting
         let timestamp_other = create_offset_datetime(1990, 4, 10, 9, 30, 0);
         let result_other = format_date_medium(timestamp_other, reference, true);
         assert!(!result_other.is_empty());
-        assert_ne!(result_other, "Today");
-        assert_ne!(result_other, "Yesterday");
+        assert_ne!(result_other, "昨天");
+        assert_ne!(result_other, "昨天");
     }
 
     #[test]
@@ -605,22 +602,22 @@ mod tests {
         let timestamp_today = create_offset_datetime(1990, 4, 12, 9, 30, 0);
         assert_eq!(
             format_absolute_date(timestamp_today, reference, true),
-            "Today"
+            "昨天"
         );
 
         // Test with previous day (yesterday)
         let timestamp_yesterday = create_offset_datetime(1990, 4, 11, 9, 30, 0);
         assert_eq!(
             format_absolute_date(timestamp_yesterday, reference, true),
-            "Yesterday"
+            "昨天"
         );
 
         // Test with other date
         let timestamp_other = create_offset_datetime(1990, 4, 10, 9, 30, 0);
         let result = format_absolute_date(timestamp_other, reference, true);
         assert!(!result.is_empty());
-        assert_ne!(result, "Today");
-        assert_ne!(result, "Yesterday");
+        assert_ne!(result, "昨天");
+        assert_ne!(result, "昨天");
     }
 
     #[test]
@@ -630,7 +627,7 @@ mod tests {
 
         // Test with enhanced formatting (today)
         let result_enhanced = format_absolute_date_medium(timestamp, reference, true);
-        assert_eq!(result_enhanced, "Today");
+        assert_eq!(result_enhanced, "昨天");
 
         // Test with standard formatting
         let result_standard = format_absolute_date_medium(timestamp, reference, false);
@@ -639,7 +636,7 @@ mod tests {
         // Test yesterday with enhanced formatting
         let timestamp_yesterday = create_offset_datetime(1990, 4, 11, 9, 30, 0);
         let result_yesterday = format_absolute_date_medium(timestamp_yesterday, reference, true);
-        assert_eq!(result_yesterday, "Yesterday");
+        assert_eq!(result_yesterday, "昨天");
     }
 
     #[test]
@@ -829,12 +826,12 @@ mod tests {
 
         assert_eq!(
             format_relative_date(reference, reference),
-            "Today".to_string()
+            "昨天".to_string()
         );
 
         assert_eq!(
             format_relative_date(next_day(), reference),
-            "Yesterday".to_string()
+            "昨天".to_string()
         );
 
         for i in 2..=6 {

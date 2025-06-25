@@ -74,7 +74,7 @@ impl ContextPickerEntry {
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum ContextPickerMode {
     File,
-    Symbol,
+    // Symbol,
     Fetch,
     Thread,
     Rules,
@@ -111,7 +111,7 @@ impl TryFrom<&str> for ContextPickerMode {
     fn try_from(value: &str) -> Result<Self, Self::Error> {
         match value {
             "file" => Ok(Self::File),
-            "symbol" => Ok(Self::Symbol),
+            // "symbol" => Ok(Self::Symbol),
             "fetch" => Ok(Self::Fetch),
             "thread" => Ok(Self::Thread),
             "rule" => Ok(Self::Rules),
@@ -124,7 +124,7 @@ impl ContextPickerMode {
     pub fn keyword(&self) -> &'static str {
         match self {
             Self::File => "file",
-            Self::Symbol => "symbol",
+            // Self::Symbol => "symbol",
             Self::Fetch => "fetch",
             Self::Thread => "thread",
             Self::Rules => "rule",
@@ -133,18 +133,18 @@ impl ContextPickerMode {
 
     pub fn label(&self) -> &'static str {
         match self {
-            Self::File => "Files & Directories",
-            Self::Symbol => "Symbols",
-            Self::Fetch => "Fetch",
-            Self::Thread => "Threads",
-            Self::Rules => "Rules",
+            Self::File => "文件 & 文件夹",
+            // Self::Symbol => "Symbols",
+            Self::Fetch => "网页",
+            Self::Thread => "对话",
+            Self::Rules => "规则",
         }
     }
 
     pub fn icon(&self) -> IconName {
         match self {
             Self::File => IconName::File,
-            Self::Symbol => IconName::Code,
+            // Self::Symbol => IconName::Code,
             Self::Fetch => IconName::Globe,
             Self::Thread => IconName::MessageBubbles,
             Self::Rules => RULES_ICON,
@@ -310,17 +310,17 @@ impl ContextPicker {
                         )
                     }));
                 }
-                ContextPickerMode::Symbol => {
-                    self.mode = ContextPickerState::Symbol(cx.new(|cx| {
-                        SymbolContextPicker::new(
-                            context_picker.clone(),
-                            self.workspace.clone(),
-                            self.context_store.clone(),
-                            window,
-                            cx,
-                        )
-                    }));
-                }
+                // ContextPickerMode::Symbol => {
+                //     self.mode = ContextPickerState::Symbol(cx.new(|cx| {
+                //         SymbolContextPicker::new(
+                //             context_picker.clone(),
+                //             self.workspace.clone(),
+                //             self.context_store.clone(),
+                //             window,
+                //             cx,
+                //         )
+                //     }));
+                // }
                 ContextPickerMode::Rules => {
                     if let Some(prompt_store) = self.prompt_store.as_ref() {
                         self.mode = ContextPickerState::Rules(cx.new(|cx| {
@@ -597,7 +597,7 @@ fn available_context_picker_entries(
 ) -> Vec<ContextPickerEntry> {
     let mut entries = vec![
         ContextPickerEntry::Mode(ContextPickerMode::File),
-        ContextPickerEntry::Mode(ContextPickerMode::Symbol),
+        // ContextPickerEntry::Mode(ContextPickerMode::Symbol),
     ];
 
     let has_selection = workspace

@@ -114,7 +114,7 @@ pub(crate) fn create_editor(
             window,
             cx,
         );
-        editor.set_placeholder_text("Message the agent – @ to include context", cx);
+        editor.set_placeholder_text("与智能体聊天 – @ 添加参考资料", cx);
         editor.set_show_indent_guides(false, cx);
         editor.set_soft_wrap();
         editor.set_use_modal_editing(true);

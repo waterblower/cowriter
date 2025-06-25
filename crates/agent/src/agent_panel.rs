@@ -608,7 +608,7 @@ impl AgentPanel {
                     if let Some(panel) = panel.upgrade() {
                         menu = Self::populate_recently_opened_menu_section(menu, panel, cx);
                     }
-                    menu.action("View All", Box::new(OpenHistory))
+                    menu.action("查看所有", Box::new(OpenHistory))
                         .end_slot_action(DeleteRecentlyOpenThread.boxed_clone())
                         .fixed_width(px(320.).into())
                         .keep_open_on_confirm(false)
@@ -1405,7 +1405,7 @@ impl AgentPanel {
             return menu;
         }
 
-        menu = menu.header("Recently Opened");
+        menu = menu.header("近期打开过的");
 
         for entry in entries {
             let title = entry.title().clone();
@@ -1659,7 +1659,7 @@ impl AgentPanel {
                         .into_any_element(),
                 }
             }
-            ActiveView::History => Label::new("History").truncate().into_any_element(),
+            ActiveView::History => Label::new("历史").truncate().into_any_element(),
             ActiveView::Configuration => Label::new("Settings").truncate().into_any_element(),
         };
 
@@ -1777,8 +1777,8 @@ impl AgentPanel {
             .menu(move |window, cx| {
                 Some(ContextMenu::build(window, cx, |mut menu, _window, _cx| {
                     menu = menu
-                        .action("New Thread", NewThread::default().boxed_clone())
-                        .action("New Text Thread", NewTextThread.boxed_clone())
+                        .action("新对话", NewThread::default().boxed_clone())
+                        // .action("New Text Thread", NewTextThread.boxed_clone())
                         .when(!is_empty, |menu| {
                             menu.action(
                                 "New From Summary",
@@ -1787,19 +1787,6 @@ impl AgentPanel {
                                 }),
                             )
                         })
-                        .separator();
-
-                    menu = menu
-                        .header("MCP Servers")
-                        .action(
-                            "View Server Extensions",
-                            Box::new(zed_actions::Extensions {
-                                category_filter: Some(
-                                    zed_actions::ExtensionCategoryFilter::ContextServers,
-                                ),
-                            }),
-                        )
-                        .action("Add Custom Server…", Box::new(AddContextServer))
                         .separator();
 
                     if let Some(usage) = usage {
@@ -1888,7 +1875,7 @@ impl AgentPanel {
                                     .style(ButtonStyle::Subtle)
                                     .tooltip(move |window, cx| {
                                         Tooltip::for_action_in(
-                                            "New Thread",
+                                            "新对话",
                                             &NewThread::default(),
                                             &focus_handle,
                                             window,
@@ -2541,7 +2528,7 @@ impl AgentPanel {
                                     .color(Color::Muted),
                             )
                             .child(
-                                Button::new("view-history", "View All")
+                                Button::new("view-history", "查看所有")
                                     .style(ButtonStyle::Subtle)
                                     .label_size(LabelSize::Small)
                                     .key_binding(

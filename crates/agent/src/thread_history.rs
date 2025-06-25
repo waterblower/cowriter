@@ -77,7 +77,7 @@ impl ThreadHistory {
     ) -> Self {
         let search_editor = cx.new(|cx| {
             let mut editor = Editor::single_line(window, cx);
-            editor.set_placeholder_text("Search threads...", cx);
+            editor.set_placeholder_text("搜索对话...", cx);
             editor
         });
 
@@ -861,11 +861,11 @@ impl TimeBucket {
 impl Display for TimeBucket {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            TimeBucket::Today => write!(f, "Today"),
-            TimeBucket::Yesterday => write!(f, "Yesterday"),
-            TimeBucket::ThisWeek => write!(f, "This Week"),
-            TimeBucket::PastWeek => write!(f, "Past Week"),
-            TimeBucket::All => write!(f, "All"),
+            TimeBucket::Today => write!(f, "今天"),
+            TimeBucket::Yesterday => write!(f, "昨天"),
+            TimeBucket::ThisWeek => write!(f, "本周"),
+            TimeBucket::PastWeek => write!(f, "上周"),
+            TimeBucket::All => write!(f, "所有"),
         }
     }
 }

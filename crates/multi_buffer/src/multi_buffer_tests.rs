@@ -3657,7 +3657,7 @@ fn test_new_empty_buffer_uses_untitled_title(cx: &mut App) {
     let buffer = cx.new(|cx| Buffer::local("", cx));
     let multibuffer = cx.new(|cx| MultiBuffer::singleton(buffer.clone(), cx));
 
-    assert_eq!(multibuffer.read(cx).title(cx), "untitled");
+    assert_eq!(multibuffer.read(cx).title(cx), "未命名");
 }
 
 #[gpui::test]
@@ -3665,7 +3665,7 @@ fn test_new_empty_buffer_uses_untitled_title_when_only_contains_whitespace(cx: &
     let buffer = cx.new(|cx| Buffer::local("\n ", cx));
     let multibuffer = cx.new(|cx| MultiBuffer::singleton(buffer.clone(), cx));
 
-    assert_eq!(multibuffer.read(cx).title(cx), "untitled");
+    assert_eq!(multibuffer.read(cx).title(cx), "未命名");
 }
 
 #[gpui::test]

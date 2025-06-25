@@ -1861,7 +1861,7 @@ impl ActiveThread {
         let open_as_markdown = IconButton::new(("open-as-markdown", ix), IconName::DocumentText)
             .icon_size(IconSize::XSmall)
             .icon_color(Color::Ignored)
-            .tooltip(Tooltip::text("Open Thread as Markdown"))
+            .tooltip(Tooltip::text("将对话以文件形式打开"))
             .on_click({
                 let thread = self.thread.clone();
                 let workspace = self.workspace.clone();
@@ -1876,7 +1876,7 @@ impl ActiveThread {
         let scroll_to_top = IconButton::new(("scroll_to_top", ix), IconName::ArrowUpAlt)
             .icon_size(IconSize::XSmall)
             .icon_color(Color::Ignored)
-            .tooltip(Tooltip::text("Scroll To Top"))
+            .tooltip(Tooltip::text("滑到顶部"))
             .on_click(cx.listener(move |this, _, _, cx| {
                 this.scroll_to_top(cx);
             }));
@@ -1906,9 +1906,10 @@ impl ActiveThread {
                                 "We appreciate your feedback and will use it to improve."
                             }
                         })
-                    .color(Color::Muted)
-                    .size(LabelSize::XSmall)
-                    .truncate())
+                        .color(Color::Muted)
+                        .size(LabelSize::XSmall)
+                        .truncate(),
+                    ),
                 )
                 .child(
                     h_flex()
@@ -1919,7 +1920,7 @@ impl ActiveThread {
                                     ThreadFeedback::Positive => Color::Accent,
                                     ThreadFeedback::Negative => Color::Ignored,
                                 })
-                                .tooltip(Tooltip::text("Helpful Response"))
+                                .tooltip(Tooltip::text("有用"))
                                 .on_click(cx.listener(move |this, _, window, cx| {
                                     this.handle_feedback_click(
                                         message_id,
@@ -1936,7 +1937,7 @@ impl ActiveThread {
                                     ThreadFeedback::Positive => Color::Ignored,
                                     ThreadFeedback::Negative => Color::Accent,
                                 })
-                                .tooltip(Tooltip::text("Not Helpful"))
+                                .tooltip(Tooltip::text("无用"))
                                 .on_click(cx.listener(move |this, _, window, cx| {
                                     this.handle_feedback_click(
                                         message_id,
@@ -1949,16 +1950,14 @@ impl ActiveThread {
                         .child(open_as_markdown),
                 )
                 .into_any_element(),
-            None if AgentSettings::get_global(cx).enable_feedback =>
-                feedback_container
+            None if AgentSettings::get_global(cx).enable_feedback => feedback_container
                 .child(
                     div().visible_on_hover("feedback_container").child(
-                        Label::new(
-                            "Rating the thread sends all of your current conversation to the Zed team.",
-                        )
-                        .color(Color::Muted)
-                    .size(LabelSize::XSmall)
-                    .truncate())
+                        Label::new("点赞或点踩会将当前整个对话发送给开发团队，帮助我们改进")
+                            .color(Color::Muted)
+                            .size(LabelSize::XSmall)
+                            .truncate(),
+                    ),
                 )
                 .child(
                     h_flex()
@@ -1966,7 +1965,7 @@ impl ActiveThread {
                             IconButton::new(("feedback-thumbs-up", ix), IconName::ThumbsUp)
                                 .icon_size(IconSize::XSmall)
                                 .icon_color(Color::Ignored)
-                                .tooltip(Tooltip::text("Helpful Response"))
+                                .tooltip(Tooltip::text("有用"))
                                 .on_click(cx.listener(move |this, _, window, cx| {
                                     this.handle_feedback_click(
                                         message_id,
@@ -1980,7 +1979,7 @@ impl ActiveThread {
                             IconButton::new(("feedback-thumbs-down", ix), IconName::ThumbsDown)
                                 .icon_size(IconSize::XSmall)
                                 .icon_color(Color::Ignored)
-                                .tooltip(Tooltip::text("Not Helpful"))
+                                .tooltip(Tooltip::text("无用"))
                                 .on_click(cx.listener(move |this, _, window, cx| {
                                     this.handle_feedback_click(
                                         message_id,
@@ -1995,9 +1994,8 @@ impl ActiveThread {
                 )
                 .into_any_element(),
             None => feedback_container
-                .child(h_flex()
-                    .child(open_as_markdown))
-                    .child(scroll_to_top)
+                .child(h_flex().child(open_as_markdown))
+                .child(scroll_to_top)
                 .into_any_element(),
         };
 

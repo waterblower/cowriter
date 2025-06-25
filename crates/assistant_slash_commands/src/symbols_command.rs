@@ -74,7 +74,7 @@ impl SlashCommand for OutlineSlashCommand {
                     .outline(None)
                     .context("no symbols for active tab")?;
 
-                let path = path.as_deref().unwrap_or(Path::new("untitled"));
+                let path = path.as_deref().unwrap_or(Path::new("未命名"));
                 let mut outline_text = format!("Symbols for {}:\n", path.display());
                 for item in &outline.path_candidates {
                     outline_text.push_str("- ");

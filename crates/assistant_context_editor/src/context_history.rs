@@ -109,7 +109,7 @@ impl Item for ContextHistory {
     type Event = ();
 
     fn tab_content_text(&self, _detail: usize, _cx: &App) -> SharedString {
-        "History".into()
+        "历史".into()
     }
 }
 

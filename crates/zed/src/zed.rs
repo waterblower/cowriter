@@ -3012,7 +3012,7 @@ mod tests {
             .update(cx, |_, window, cx| {
                 editor.update(cx, |editor, cx| {
                     assert!(!editor.is_dirty(cx));
-                    assert_eq!(editor.title(cx), "untitled");
+                    assert_eq!(editor.title(cx), "未命名");
                     assert!(Arc::ptr_eq(
                         &editor.buffer().read(cx).language_at(0, cx).unwrap(),
                         &languages::PLAIN_TEXT

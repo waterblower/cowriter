@@ -1534,7 +1534,7 @@ impl Pane {
                         .file_name()
                         .and_then(|name| name.to_str().map(ToOwned::to_owned))
                 });
-                file_names.insert(filename.unwrap_or("untitled".to_string()));
+                file_names.insert(filename.unwrap_or("未命名".to_string()));
             });
         }
         if file_names.len() > 6 {

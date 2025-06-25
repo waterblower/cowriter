@@ -3617,7 +3617,7 @@ impl EditorElement {
                                         Label::new(
                                             filename
                                                 .map(SharedString::from)
-                                                .unwrap_or_else(|| "untitled".into()),
+                                                .unwrap_or_else(|| "未命名".into()),
                                         )
                                         .single_line()
                                         .when_some(

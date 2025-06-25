@@ -194,17 +194,8 @@ impl Model {
 
     pub fn display_name(&self) -> &str {
         match self {
-            // Model::ClaudeOpus4 => "Claude Opus 4",
-            // Model::ClaudeOpus4Thinking => "Claude Opus 4 Thinking",
-            Model::ClaudeSonnet4 => "Claude Sonnet 4",
-            Model::ClaudeSonnet4Thinking => "Claude Sonnet 4 Thinking",
-            // Self::Claude3_7Sonnet => "Claude 3.7 Sonnet",
-            // Self::Claude3_5Sonnet => "Claude 3.5 Sonnet",
-            // Self::Claude3_7SonnetThinking => "Claude 3.7 Sonnet Thinking",
-            // Self::Claude3_5Haiku => "Claude 3.5 Haiku",
-            // Self::Claude3Opus => "Claude 3 Opus",
-            // Self::Claude3Sonnet => "Claude 3 Sonnet",
-            // Self::Claude3Haiku => "Claude 3 Haiku",
+            Model::ClaudeSonnet4 => "速度模式",
+            Model::ClaudeSonnet4Thinking => "深度思考模式",
             Self::Custom {
                 name, display_name, ..
             } => display_name.as_ref().unwrap_or(name),

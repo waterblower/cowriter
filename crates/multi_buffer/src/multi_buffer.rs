@@ -2612,7 +2612,7 @@ impl MultiBuffer {
             }
         };
 
-        "untitled".into()
+        "未命名".into()
     }
 
     fn buffer_content_title(&self, buffer: &Buffer) -> Option<Cow<'_, str>> {

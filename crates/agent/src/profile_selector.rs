@@ -75,27 +75,27 @@ impl ProfileSelector {
                 ));
             }
 
-            if found_non_builtin {
-                menu = menu.separator().header("Custom Profiles");
-                for (profile_id, profile_name) in self.profiles.iter() {
-                    if builtin_profiles::is_builtin(profile_id) {
-                        continue;
-                    }
-                    menu = menu.item(self.menu_entry_for_profile(
-                        profile_id.clone(),
-                        profile_name,
-                        settings,
-                        cx,
-                    ));
-                }
-            }
+            // if found_non_builtin {
+            //     menu = menu.separator().header("Custom Profiles");
+            //     for (profile_id, profile_name) in self.profiles.iter() {
+            //         if builtin_profiles::is_builtin(profile_id) {
+            //             continue;
+            //         }
+            //         menu = menu.item(self.menu_entry_for_profile(
+            //             profile_id.clone(),
+            //             profile_name,
+            //             settings,
+            //             cx,
+            //         ));
+            //     }
+            // }
 
             menu = menu.separator();
-            menu = menu.item(ContextMenuEntry::new("Configure Profiles…").handler(
-                move |window, cx| {
-                    window.dispatch_action(ManageProfiles::default().boxed_clone(), cx);
-                },
-            ));
+            // menu = menu.item(ContextMenuEntry::new("Configure Profiles…").handler(
+            //     move |window, cx| {
+            //         window.dispatch_action(ManageProfiles::default().boxed_clone(), cx);
+            //     },
+            // ));
 
             menu
         })

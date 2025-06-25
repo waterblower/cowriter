@@ -87,18 +87,17 @@ fn search(
             })
         }
 
-        Some(ContextPickerMode::Symbol) => {
-            let search_symbols_task =
-                search_symbols(query.clone(), cancellation_flag.clone(), &workspace, cx);
-            cx.background_spawn(async move {
-                search_symbols_task
-                    .await
-                    .into_iter()
-                    .map(Match::Symbol)
-                    .collect()
-            })
-        }
-
+        // Some(ContextPickerMode::Symbol) => {
+        //     let search_symbols_task =
+        //         search_symbols(query.clone(), cancellation_flag.clone(), &workspace, cx);
+        //     cx.background_spawn(async move {
+        //         search_symbols_task
+        //             .await
+        //             .into_iter()
+        //             .map(Match::Symbol)
+        //             .collect()
+        //     })
+        // }
         Some(ContextPickerMode::Thread) => {
             if let Some((thread_store, context_store)) = thread_store
                 .as_ref()
@@ -304,7 +303,7 @@ impl ContextPickerCompletionProvider {
                                     .read(cx)
                                     .file()
                                     .map(|file| file.full_path(cx))
-                                    .unwrap_or_else(|| PathBuf::from("untitled"));
+                                    .unwrap_or_else(|| PathBuf::from("未命名"));
                                 let file_name = full_path
                                     .file_name()
                                     .unwrap_or_default()

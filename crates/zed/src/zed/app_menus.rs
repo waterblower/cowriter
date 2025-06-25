@@ -7,10 +7,10 @@ pub fn app_menus() -> Vec<Menu> {
 
     vec![
         Menu {
-            name: "Zed".into(),
+            name: "写作助手".into(),
             items: vec![
-                MenuItem::action("About Zed…", zed_actions::About),
-                MenuItem::action("Check for Updates", auto_update::Check),
+                MenuItem::action("关于本软件", zed_actions::About),
+                // MenuItem::action("Check for Updates", auto_update::Check),
                 MenuItem::separator(),
                 MenuItem::submenu(Menu {
                     name: "Settings".into(),
@@ -29,69 +29,61 @@ pub fn app_menus() -> Vec<Menu> {
                         ),
                     ],
                 }),
+                // MenuItem::separator(),
+                // MenuItem::submenu(Menu {
+                //     name: "Services".into(),
+                //     items: vec![],
+                // }),
                 MenuItem::separator(),
-                MenuItem::submenu(Menu {
-                    name: "Services".into(),
-                    items: vec![],
-                }),
-                MenuItem::separator(),
-                MenuItem::action("Extensions", zed_actions::Extensions::default()),
-                MenuItem::action("Install CLI", install_cli::Install),
-                MenuItem::separator(),
+                // MenuItem::action("Extensions", zed_actions::Extensions::default()),
+                // MenuItem::action("Install CLI", install_cli::Install),
+                // MenuItem::separator(),
                 #[cfg(target_os = "macos")]
-                MenuItem::action("Hide Zed", super::Hide),
+                MenuItem::action("隐藏本窗口", super::Hide),
                 #[cfg(target_os = "macos")]
-                MenuItem::action("Hide Others", super::HideOthers),
+                MenuItem::action("隐藏其他窗口", super::HideOthers),
                 #[cfg(target_os = "macos")]
-                MenuItem::action("Show All", super::ShowAll),
+                // MenuItem::action("Show All", super::ShowAll),
                 MenuItem::separator(),
                 MenuItem::action("Quit Zed", Quit),
             ],
         },
         Menu {
-            name: "File".into(),
+            name: "文件".into(),
             items: vec![
-                MenuItem::action("New", workspace::NewFile),
-                MenuItem::action("New Window", workspace::NewWindow),
+                MenuItem::action("新文件", workspace::NewFile),
+                MenuItem::action("新窗口", workspace::NewWindow),
                 MenuItem::separator(),
                 #[cfg(not(target_os = "macos"))]
-                MenuItem::action("Open File...", workspace::OpenFiles),
+                MenuItem::action("打开文件...", workspace::OpenFiles),
                 MenuItem::action(
                     if cfg!(not(target_os = "macos")) {
-                        "Open Folder..."
+                        "打开文件夹..."
                     } else {
-                        "Open…"
+                        "打开…"
                     },
                     workspace::Open,
                 ),
                 MenuItem::action(
-                    "Open Recent...",
+                    "打开近期...",
                     zed_actions::OpenRecent {
                         create_new_window: false,
                     },
                 ),
-                MenuItem::action(
-                    "Open Remote...",
-                    zed_actions::OpenRemote {
-                        create_new_window: false,
-                        from_existing_connection: false,
-                    },
-                ),
                 MenuItem::separator(),
-                MenuItem::action("Add Folder to Project…", workspace::AddFolderToProject),
                 MenuItem::separator(),
-                MenuItem::action("Save", workspace::Save { save_intent: None }),
-                MenuItem::action("Save As…", workspace::SaveAs),
-                MenuItem::action("Save All", workspace::SaveAll { save_intent: None }),
+                MenuItem::action("保存", workspace::Save { save_intent: None }),
+                MenuItem::action("保存为...", workspace::SaveAs),
+                MenuItem::action("保存所有", workspace::SaveAll { save_intent: None }),
                 MenuItem::separator(),
                 MenuItem::action(
-                    "Close Editor",
+                    "关闭编辑器",
                     workspace::CloseActiveItem {
                         save_intent: None,
                         close_pinned: true,
                     },
                 ),
-                MenuItem::action("Close Window", workspace::CloseWindow),
+                MenuItem::action("关闭窗口", workspace::CloseWindow),
             ],
         },
         Menu {
@@ -112,31 +104,6 @@ pub fn app_menus() -> Vec<Menu> {
                     "Toggle Line Comment",
                     editor::actions::ToggleComments::default(),
                 ),
-            ],
-        },
-        Menu {
-            name: "Selection".into(),
-            items: vec![
-                MenuItem::os_action(
-                    "Select All",
-                    editor::actions::SelectAll,
-                    OsAction::SelectAll,
-                ),
-                MenuItem::action("Expand Selection", editor::actions::SelectLargerSyntaxNode),
-                MenuItem::action("Shrink Selection", editor::actions::SelectSmallerSyntaxNode),
-                MenuItem::separator(),
-                MenuItem::action("Add Cursor Above", editor::actions::AddSelectionAbove),
-                MenuItem::action("Add Cursor Below", editor::actions::AddSelectionBelow),
-                MenuItem::action(
-                    "Select Next Occurrence",
-                    editor::actions::SelectNext {
-                        replace_newest: false,
-                    },
-                ),
-                MenuItem::separator(),
-                MenuItem::action("Move Line Up", editor::actions::MoveLineUp),
-                MenuItem::action("Move Line Down", editor::actions::MoveLineDown),
-                MenuItem::action("Duplicate Selection", editor::actions::DuplicateLineDown),
             ],
         },
         Menu {
@@ -176,55 +143,6 @@ pub fn app_menus() -> Vec<Menu> {
                 MenuItem::separator(),
                 MenuItem::action("Diagnostics", diagnostics::Deploy),
                 MenuItem::separator(),
-            ],
-        },
-        Menu {
-            name: "Go".into(),
-            items: vec![
-                MenuItem::action("Back", workspace::GoBack),
-                MenuItem::action("Forward", workspace::GoForward),
-                MenuItem::separator(),
-                MenuItem::action("Command Palette...", zed_actions::command_palette::Toggle),
-                MenuItem::separator(),
-                MenuItem::action("Go to File...", workspace::ToggleFileFinder::default()),
-                // MenuItem::action("Go to Symbol in Project", project_symbols::Toggle),
-                MenuItem::action(
-                    "Go to Symbol in Editor...",
-                    zed_actions::outline::ToggleOutline,
-                ),
-                MenuItem::action("Go to Line/Column...", editor::actions::ToggleGoToLine),
-                MenuItem::separator(),
-                MenuItem::action("Go to Definition", editor::actions::GoToDefinition),
-                MenuItem::action("Go to Declaration", editor::actions::GoToDeclaration),
-                MenuItem::action("Go to Type Definition", editor::actions::GoToTypeDefinition),
-                MenuItem::action("Find All References", editor::actions::FindAllReferences),
-                MenuItem::separator(),
-                MenuItem::action("Next Problem", editor::actions::GoToDiagnostic),
-                MenuItem::action("Previous Problem", editor::actions::GoToPreviousDiagnostic),
-            ],
-        },
-        Menu {
-            name: "Run".into(),
-            items: vec![
-                MenuItem::action(
-                    "Spawn Task",
-                    zed_actions::Spawn::ViaModal {
-                        reveal_target: None,
-                    },
-                ),
-                MenuItem::action("Start Debugger", debugger_ui::Start),
-                MenuItem::separator(),
-                MenuItem::action("Edit tasks.json...", crate::zed::OpenProjectTasks),
-                MenuItem::action("Edit debug.json...", zed_actions::OpenProjectDebugTasks),
-                MenuItem::separator(),
-                MenuItem::action("Continue", debugger_ui::Continue),
-                MenuItem::action("Step Over", debugger_ui::StepOver),
-                MenuItem::action("Step Into", debugger_ui::StepInto),
-                MenuItem::action("Step Out", debugger_ui::StepOut),
-                MenuItem::separator(),
-                MenuItem::action("Toggle Breakpoint", editor::actions::ToggleBreakpoint),
-                MenuItem::action("Edit Breakpoint", editor::actions::EditLogBreakpoint),
-                MenuItem::action("Clear all Breakpoints", debugger_ui::ClearAllBreakpoints),
             ],
         },
         Menu {

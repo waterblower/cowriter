@@ -976,7 +976,7 @@ impl CollabPanel {
         cx: &mut Context<Self>,
     ) -> impl IntoElement {
         let project_name: SharedString = if worktree_root_names.is_empty() {
-            "untitled".to_string()
+            "未命名".to_string()
         } else {
             worktree_root_names.join(", ")
         }

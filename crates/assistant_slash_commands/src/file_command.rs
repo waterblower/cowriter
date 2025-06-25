@@ -405,7 +405,7 @@ pub fn codeblock_fence_for_path(
 
         write!(text, "{}", path.display()).unwrap();
     } else {
-        write!(text, "untitled").unwrap();
+        write!(text, "未命名").unwrap();
     }
 
     if let Some(row_range) = row_range {
@@ -430,7 +430,7 @@ pub fn build_entry_output_section(
     let mut label = if let Some(path) = path {
         path.to_string_lossy().to_string()
     } else {
-        "untitled".to_string()
+        "未命名".to_string()
     };
     if let Some(line_range) = line_range {
         write!(label, ":{}-{}", line_range.start, line_range.end).unwrap();

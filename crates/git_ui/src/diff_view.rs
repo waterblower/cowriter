@@ -228,7 +228,7 @@ impl Item for DiffView {
                         .to_string(),
                 )
             })
-            .unwrap_or_else(|| "untitled".into());
+            .unwrap_or_else(|| "未命名".into());
         let new_filename = self
             .new_buffer
             .read(cx)
@@ -241,7 +241,7 @@ impl Item for DiffView {
                         .to_string(),
                 )
             })
-            .unwrap_or_else(|| "untitled".into());
+            .unwrap_or_else(|| "未命名".into());
         format!("{old_filename} ↔ {new_filename}").into()
     }
 
@@ -251,13 +251,13 @@ impl Item for DiffView {
             .read(cx)
             .file()
             .map(|file| file.full_path(cx).compact().to_string_lossy().to_string())
-            .unwrap_or_else(|| "untitled".into());
+            .unwrap_or_else(|| "未命名".into());
         let new_path = self
             .new_buffer
             .read(cx)
             .file()
             .map(|file| file.full_path(cx).compact().to_string_lossy().to_string())
-            .unwrap_or_else(|| "untitled".into());
+            .unwrap_or_else(|| "未命名".into());
         Some(format!("{old_path} ↔ {new_path}").into())
     }
 

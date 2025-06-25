@@ -119,7 +119,7 @@ impl PickerDelegate for ThreadContextPickerDelegate {
     }
 
     fn placeholder_text(&self, _window: &mut Window, _cx: &mut App) -> Arc<str> {
-        "Search threads…".into()
+        "搜索对话…".into()
     }
 
     fn update_matches(

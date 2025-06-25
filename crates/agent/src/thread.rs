@@ -373,7 +373,7 @@ pub enum ThreadSummary {
 }
 
 impl ThreadSummary {
-    pub const DEFAULT: SharedString = SharedString::new_static("New Thread");
+    pub const DEFAULT: SharedString = SharedString::new_static("新对话");
 
     pub fn or_default(&self) -> SharedString {
         self.unwrap_or(Self::DEFAULT)

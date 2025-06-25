@@ -378,7 +378,7 @@ impl Zeta {
         let path: Arc<Path> = snapshot
             .file()
             .map(|f| Arc::from(f.full_path(cx).as_path()))
-            .unwrap_or_else(|| Arc::from(Path::new("untitled")));
+            .unwrap_or_else(|| Arc::from(Path::new("未命名")));
 
         let zeta = cx.entity();
         let client = self.client.clone();
@@ -1196,11 +1196,9 @@ fn prompt_for_outline(snapshot: &BufferSnapshot) -> String {
     writeln!(
         input_outline,
         "```{}",
-        snapshot
-            .file()
-            .map_or(Cow::Borrowed("untitled"), |file| file
-                .path()
-                .to_string_lossy())
+        snapshot.file().map_or(Cow::Borrowed("未命名"), |file| file
+            .path()
+            .to_string_lossy())
     )
     .unwrap();
 
@@ -1261,11 +1259,11 @@ impl Event {
                 let old_path = old_snapshot
                     .file()
                     .map(|f| f.path().as_ref())
-                    .unwrap_or(Path::new("untitled"));
+                    .unwrap_or(Path::new("未命名"));
                 let new_path = new_snapshot
                     .file()
                     .map(|f| f.path().as_ref())
-                    .unwrap_or(Path::new("untitled"));
+                    .unwrap_or(Path::new("未命名"));
                 if old_path != new_path {
                     writeln!(prompt, "User renamed {:?} to {:?}\n", old_path, new_path).unwrap();
                 }
