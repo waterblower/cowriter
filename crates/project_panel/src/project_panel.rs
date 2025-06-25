@@ -792,19 +792,18 @@ impl ProjectPanel {
                             menu.action("Search Inside", Box::new(NewSearchInDirectory))
                         })
                     } else {
-                        menu.action("New File", Box::new(NewFile))
-                            .action("New Folder", Box::new(NewDirectory))
+                        menu.action("新文件", Box::new(NewFile))
+                            .action("新文件夹", Box::new(NewDirectory))
                             .separator()
                             .when(is_local && cfg!(target_os = "macos"), |menu| {
-                                menu.action("Reveal in Finder", Box::new(RevealInFileManager))
+                                menu.action("在Finder里显示", Box::new(RevealInFileManager))
                             })
                             .when(is_local && cfg!(not(target_os = "macos")), |menu| {
-                                menu.action("Reveal in File Manager", Box::new(RevealInFileManager))
+                                menu.action("在文件管理器内显示", Box::new(RevealInFileManager))
                             })
                             .when(is_local, |menu| {
-                                menu.action("Open in Default App", Box::new(OpenWithSystem))
+                                menu.action("用默认程序打开", Box::new(OpenWithSystem))
                             })
-                            .action("Open in Terminal", Box::new(OpenInTerminal))
                             .when(is_dir, |menu| {
                                 menu.separator()
                                     .action("Find in Folder…", Box::new(NewSearchInDirectory))
@@ -816,32 +815,26 @@ impl ProjectPanel {
                                 menu.action("Fold Directory", Box::new(FoldDirectory))
                             })
                             .separator()
-                            .action("Cut", Box::new(Cut))
-                            .action("Copy", Box::new(Copy))
-                            .action("Duplicate", Box::new(Duplicate))
+                            .action("剪切", Box::new(Cut))
+                            .action("复制", Box::new(Copy))
+                            .action("备份", Box::new(Duplicate))
                             // TODO: Paste should always be visible, cbut disabled when clipboard is empty
                             .map(|menu| {
                                 if self.clipboard.as_ref().is_some() {
-                                    menu.action("Paste", Box::new(Paste))
+                                    menu.action("粘贴", Box::new(Paste))
                                 } else {
-                                    menu.disabled_action("Paste", Box::new(Paste))
+                                    menu.disabled_action("粘贴", Box::new(Paste))
                                 }
                             })
                             .separator()
-                            .action("Copy Path", Box::new(zed_actions::workspace::CopyPath))
-                            .action(
-                                "Copy Relative Path",
-                                Box::new(zed_actions::workspace::CopyRelativePath),
-                            )
-                            .separator()
                             .when(!should_hide_rename, |menu| {
-                                menu.action("Rename", Box::new(Rename))
+                                menu.action("重命名", Box::new(Rename))
                             })
                             .when(!is_root & !is_remote, |menu| {
-                                menu.action("Trash", Box::new(Trash { skip_prompt: false }))
+                                menu.action("放到回收站", Box::new(Trash { skip_prompt: false }))
                             })
                             .when(!is_root, |menu| {
-                                menu.action("Delete", Box::new(Delete { skip_prompt: false }))
+                                menu.action("删除", Box::new(Delete { skip_prompt: false }))
                             })
                             .when(!is_remote & is_root, |menu| {
                                 menu.separator()
