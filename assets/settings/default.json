@@ -1652,11 +1652,11 @@
   "language_models": {
     "cowriter": {
       "version": "1",
-      "api_url": "https://cowriter.deno.dev/api/agent/proxy-claude-v2"
+      "api_url": "http://128.199.151.248:8000/api/proxy-claude"
     },
     "anthropic": {
       "version": "1",
-      "api_url": "https://cowriter.deno.dev/api/agent/proxy-claude-v2"
+      "api_url": "http://128.199.151.248:8000/api/proxy-claude"
     },
     "google": {
       "api_url": "https://generativelanguage.googleapis.com"
