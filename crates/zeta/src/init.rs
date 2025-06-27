@@ -8,7 +8,7 @@ use settings::update_settings_file;
 use ui::App;
 use workspace::Workspace;
 
-use crate::{RateCompletionModal, onboarding_modal::ZedPredictModal};
+use crate::RateCompletionModal;
 
 actions!(edit_prediction, [ResetOnboarding, RateCompletions]);
 
@@ -20,18 +20,18 @@ pub fn init(cx: &mut App) {
             }
         });
 
-        workspace.register_action(
-            move |workspace, _: &zed_actions::OpenZedPredictOnboarding, window, cx| {
-                ZedPredictModal::toggle(
-                    workspace,
-                    workspace.user_store().clone(),
-                    workspace.client().clone(),
-                    workspace.app_state().fs.clone(),
-                    window,
-                    cx,
-                )
-            },
-        );
+        // workspace.register_action(
+        //     move |workspace, _: &zed_actions::OpenZedPredictOnboarding, window, cx| {
+        //         ZedPredictModal::toggle(
+        //             workspace,
+        //             workspace.user_store().clone(),
+        //             workspace.client().clone(),
+        //             workspace.app_state().fs.clone(),
+        //             window,
+        //             cx,
+        //         )
+        //     },
+        // );
 
         workspace.register_action(|workspace, _: &ResetOnboarding, _window, cx| {
             update_settings_file::<AllLanguageSettings>(

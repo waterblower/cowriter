@@ -48,7 +48,7 @@ impl RateCompletionView {
 }
 
 impl RateCompletionModal {
-    pub fn toggle(workspace: &mut Workspace, window: &mut Window, cx: &mut Context<Workspace>) {
+    pub fn toggle(_workspace: &mut Workspace, _window: &mut Window, _cx: &mut Context<Workspace>) {
         // if let Some(zeta) = Zeta::global(cx) {
         //     workspace.toggle_modal(window, cx, |_window, cx| RateCompletionModal::new(zeta, cx));
 

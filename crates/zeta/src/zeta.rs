@@ -2,7 +2,6 @@ mod completion_diff_element;
 mod init;
 mod input_excerpt;
 mod license_detection;
-mod onboarding_modal;
 mod onboarding_telemetry;
 mod rate_completion_modal;
 

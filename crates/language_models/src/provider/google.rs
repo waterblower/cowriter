@@ -926,11 +926,11 @@ impl Render for ConfigurationView {
                         .child(Label::new(if env_var_set {
                             format!("API key set in {GOOGLE_AI_API_KEY_VAR} environment variable.")
                         } else {
-                            "API key configured.".to_string()
+                            "AI激活码已配置成功".to_string()
                         })),
                 )
                 .child(
-                    Button::new("reset-key", "Reset Key")
+                    Button::new("reset-key", "重置AI激活码")
                         .label_size(LabelSize::Small)
                         .icon(Some(IconName::Trash))
                         .icon_size(IconSize::Small)

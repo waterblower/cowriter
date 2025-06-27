@@ -203,7 +203,7 @@ impl Item for SettingsPage {
     }
 
     fn tab_content_text(&self, _detail: usize, _cx: &App) -> SharedString {
-        "Settings".into()
+        "配置".into()
     }
 
     fn show_toolbar(&self) -> bool {
@@ -221,7 +221,7 @@ impl Render for SettingsPage {
             .p_4()
             .size_full()
             .gap_4()
-            .child(Label::new("Settings").size(LabelSize::Large))
+            .child(Label::new("配置").size(LabelSize::Large))
             .child(
                 v_flex().gap_1().child(Label::new("Appearance")).child(
                     v_flex()

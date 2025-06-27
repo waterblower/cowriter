@@ -5053,7 +5053,7 @@ impl Render for ProjectPanel {
                 .p_4()
                 .track_focus(&self.focus_handle(cx))
                 .child(
-                    Button::new("open_project", "Open a project")
+                    Button::new("open_project", "打开一个文件夹")
                         .full_width()
                         .key_binding(KeyBinding::for_action_in(
                             &OpenRecent::default(),
@@ -5181,7 +5181,7 @@ impl Panel for ProjectPanel {
     }
 
     fn icon_tooltip(&self, _window: &Window, _cx: &App) -> Option<&'static str> {
-        Some("Project Panel")
+        Some("文件浏览板")
     }
 
     fn toggle_action(&self) -> Box<dyn Action> {

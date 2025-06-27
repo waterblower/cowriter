@@ -4767,7 +4767,7 @@ fn file_name(path: &Path) -> String {
 
 impl Panel for OutlinePanel {
     fn persistent_name() -> &'static str {
-        "Outline Panel"
+        "大纲板"
     }
 
     fn position(&self, _: &Window, cx: &App) -> DockPosition {
@@ -4815,7 +4815,7 @@ impl Panel for OutlinePanel {
     }
 
     fn icon_tooltip(&self, _window: &Window, _: &App) -> Option<&'static str> {
-        Some("Outline Panel")
+        Some("大纲")
     }
 
     fn toggle_action(&self) -> Box<dyn Action> {

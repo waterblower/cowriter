@@ -601,7 +601,7 @@ impl TitleBar {
                             zed_actions::OpenAccountSettings.boxed_clone(),
                         )
                         .separator()
-                        .action("Settings", zed_actions::OpenSettings.boxed_clone())
+                        .action("配置", zed_actions::OpenSettings.boxed_clone())
                         .action("Key Bindings", Box::new(zed_actions::OpenKeymap))
                         .action(
                             "Themes…",
@@ -645,7 +645,7 @@ impl TitleBar {
                 .anchor(Corner::TopRight)
                 .menu(|window, cx| {
                     ContextMenu::build(window, cx, |menu, _, _| {
-                        menu.action("Settings", zed_actions::OpenSettings.boxed_clone())
+                        menu.action("配置", zed_actions::OpenSettings.boxed_clone())
                             .action("Key Bindings", Box::new(zed_actions::OpenKeymap))
                             .action(
                                 "Themes…",

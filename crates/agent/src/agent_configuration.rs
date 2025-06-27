@@ -219,7 +219,7 @@ impl AgentConfiguration {
                         parent.child(
                             Button::new(
                                 SharedString::from(format!("new-thread-{provider_id}")),
-                                "Start New Thread",
+                                "开启新对话",
                             )
                             .icon_position(IconPosition::Start)
                             .icon(IconName::Plus)
@@ -865,7 +865,7 @@ impl Render for AgentConfiguration {
                     .track_scroll(&self.scroll_handle)
                     .size_full()
                     .overflow_y_scroll()
-                    .child(self.render_general_settings_section(cx))
+                    // .child(self.render_general_settings_section(cx))
                     // .child(self.render_context_servers_section(window, cx))
                     .child(self.render_provider_configuration_section(cx)),
             )

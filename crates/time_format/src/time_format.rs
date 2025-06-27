@@ -136,9 +136,9 @@ fn format_absolute_timestamp(
         let timestamp_date = timestamp.date();
         let reference_date = reference.date();
         if timestamp_date == reference_date {
-            format!("Today at {}", format_absolute_time(timestamp))
+            format!("今天 {}", format_absolute_time(timestamp))
         } else if reference_date.previous_day() == Some(timestamp_date) {
-            format!("Yesterday at {}", format_absolute_time(timestamp))
+            format!("昨天 {}", format_absolute_time(timestamp))
         } else {
             format!(
                 "{} {}",
@@ -395,9 +395,9 @@ pub fn format_timestamp_naive(
     let timestamp_local_date = timestamp_local.date();
 
     if timestamp_local_date == reference_local_date {
-        format!("Today at {}", formatted_time)
+        format!("今天 {}", formatted_time)
     } else if reference_local_date.previous_day() == Some(timestamp_local_date) {
-        format!("Yesterday at {}", formatted_time)
+        format!("昨天 {}", formatted_time)
     } else {
         let formatted_date = match is_12_hour_time {
             true => format!(

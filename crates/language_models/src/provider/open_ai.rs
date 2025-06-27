@@ -901,7 +901,7 @@ impl Render for ConfigurationView {
                         .child(Label::new(if env_var_set {
                             format!("API key set in {OPENAI_API_KEY_VAR} environment variable.")
                         } else {
-                            "API key configured.".to_string()
+                            "AI激活码已配置成功".to_string()
                         })),
                 )
                 .child(

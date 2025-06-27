@@ -3975,7 +3975,7 @@ mod tests {
         let item_c = add_labeled_item(&pane, "C", false, cx);
         let item_d = add_labeled_item(&pane, "D", false, cx);
         add_labeled_item(&pane, "E", false, cx);
-        add_labeled_item(&pane, "Settings", false, cx);
+        add_labeled_item(&pane, "配置", false, cx);
         assert_item_labels(&pane, ["A", "B", "C", "D", "E", "Settings*"], cx);
 
         set_max_tabs(cx, Some(5));

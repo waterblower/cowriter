@@ -584,7 +584,7 @@ impl PickerDelegate for LanguageModelPickerDelegate {
                     })
                 })
                 .child(
-                    Button::new("configure", "Configure")
+                    Button::new("configure", "配置")
                         .icon(IconName::Settings)
                         .icon_size(IconSize::Small)
                         .icon_color(Color::Muted)

@@ -1238,7 +1238,7 @@ impl Render for ConfigurationView {
                         })),
                 )
                 .child(
-                    Button::new("reset-key", "Reset Key")
+                    Button::new("reset-key", "重置AI激活码")
                         .icon(Some(IconName::Trash))
                         .icon_size(IconSize::Small)
                         .icon_position(IconPosition::Start)

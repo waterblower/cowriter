@@ -1536,7 +1536,7 @@ impl Panel for AgentPanel {
     }
 
     fn icon_tooltip(&self, _window: &Window, _cx: &App) -> Option<&'static str> {
-        Some("Agent Panel")
+        Some("AI写作助手面板")
     }
 
     fn toggle_action(&self) -> Box<dyn Action> {
@@ -1660,7 +1660,7 @@ impl AgentPanel {
                 }
             }
             ActiveView::History => Label::new("历史").truncate().into_any_element(),
-            ActiveView::Configuration => Label::new("Settings").truncate().into_any_element(),
+            ActiveView::Configuration => Label::new("配置").truncate().into_any_element(),
         };
 
         h_flex()
@@ -1789,47 +1789,6 @@ impl AgentPanel {
                         })
                         .separator();
 
-                    if let Some(usage) = usage {
-                        menu = menu
-                            .header_with_link("Prompt Usage", "Manage", account_url.clone())
-                            .custom_entry(
-                                move |_window, cx| {
-                                    let used_percentage = match usage.limit {
-                                        UsageLimit::Limited(limit) => {
-                                            Some((usage.amount as f32 / limit as f32) * 100.)
-                                        }
-                                        UsageLimit::Unlimited => None,
-                                    };
-
-                                    h_flex()
-                                        .flex_1()
-                                        .gap_1p5()
-                                        .children(used_percentage.map(|percent| {
-                                            ProgressBar::new("usage", percent, 100., cx)
-                                        }))
-                                        .child(
-                                            Label::new(match usage.limit {
-                                                UsageLimit::Limited(limit) => {
-                                                    format!("{} / {limit}", usage.amount)
-                                                }
-                                                UsageLimit::Unlimited => {
-                                                    format!("{} / ∞", usage.amount)
-                                                }
-                                            })
-                                            .size(LabelSize::Small)
-                                            .color(Color::Muted),
-                                        )
-                                        .into_any_element()
-                                },
-                                move |_, cx| cx.open_url(&zed_urls::account_url(cx)),
-                            )
-                            .separator()
-                    }
-
-                    menu = menu
-                        .action("Rules…", Box::new(OpenRulesLibrary::default()))
-                        .action("Settings", Box::new(OpenConfiguration))
-                        .action(zoom_in_label, Box::new(ToggleZoom));
                     menu
                 }))
             });
@@ -2523,7 +2482,7 @@ impl AgentPanel {
                             .border_b_1()
                             .border_color(cx.theme().colors().border_variant)
                             .child(
-                                Label::new("Recent")
+                                Label::new("近期")
                                     .size(LabelSize::Small)
                                     .color(Color::Muted),
                             )
